@@ -11,13 +11,17 @@ const fs = require('fs');
 const { getSubdomain, getPassword, hashIt } = require('./functions.js');
 const socketio = require('socket.io');
 const { runInNewContext } = require("vm");
+const cookieParser = require('cookie-parser')
+let randKey;
+
 
 const app = express();
 app.set('view engine', 'ejs');
 app.use(
     express.json(),
     express.static('public'),
-    express.urlencoded({ extended: true })
+    express.urlencoded({ extended: true }),
+    cookieParser()
     );
 let server;
 if (PORT == 80) {
@@ -56,6 +60,8 @@ app.post("/verify", async (req, res) => {
       res.redirect("/");
       return;
     }
+    randKey = hashIt(password);
+    res.cookie("G_VER", randKey);
     res.redirect("/panel");
   } else {
     res.redirect("/");
@@ -69,10 +75,23 @@ app.get("/verify", async (req, res) => {
 app.get("/panel", (req, res) => {
   let host = req.get('host');
   if (getSubdomain(host) == "admin") {
+    if (!req.cookies["G_VER"]) {
+      res.redirect("/");
+      return;
+    }
+    if (req.cookies["G_VER"] !== randKey) {
+      res.redirect("/");
+      return;
+    }
     res.render("admin");
   } else {
     res.redirect("/");
   }
+});
+
+app.get("/admin-logout", (req, res) => {
+  res.clearCookie("G_VER");
+  res.redirect("/");
 });
 
 app.get('/projects', (req, res) => {
