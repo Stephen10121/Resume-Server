@@ -1,7 +1,7 @@
 {
   "name": "multiplayercanvas",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is for my resume.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,5 +15,14 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.13",
     "socket.io": "^4.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stephen10121/Resume-Server.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Stephen10121/Resume-Server/issues"
+  },
+  "homepage": "https://github.com/Stephen10121/Resume-Server#readme"
 }
