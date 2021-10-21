@@ -58,6 +58,10 @@ app.post("/verify", (req, res) => {
   }
 });
 
+app.get("/verify", (req, res) => {
+  res.redirect("/");
+});
+
 app.get('/projects', (req, res) => {
   res.render('projects');
 });
