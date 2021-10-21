@@ -8,7 +8,7 @@ if (PORT == 80) {
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { getSubdomain } = require('./functions.js');
+const { getSubdomain, getPassword } = require('./functions.js');
 const socketio = require('socket.io');
 const { runInNewContext } = require("vm");
 
@@ -58,7 +58,8 @@ app.post("/verify", (req, res) => {
   }
 });
 
-app.get("/verify", (req, res) => {
+app.get("/verify", async (req, res) => {
+  //console.log(await getPassword());
   res.redirect("/");
 });
 

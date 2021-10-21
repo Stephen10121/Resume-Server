@@ -1,3 +1,4 @@
-node_modules/
-cert.crt
-key.key
+./node_modules/
+./cert.crt
+./key.key
+./password.txt
