@@ -1,4 +1,4 @@
-./node_modules/
+node_modules/
 ./cert.crt
 ./key.key
 ./password.txt
