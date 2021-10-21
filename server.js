@@ -8,7 +8,7 @@ if (PORT == 80) {
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { getSubdomain, getPassword } = require('./functions.js');
+const { getSubdomain, getPassword, hashIt } = require('./functions.js');
 const socketio = require('socket.io');
 const { runInNewContext } = require("vm");
 
@@ -43,7 +43,7 @@ app.get('/', async (req, res) => {
   }
 });
 
-app.post("/verify", (req, res) => {
+app.post("/verify", async (req, res) => {
   let host = req.get('host');
   if (getSubdomain(host) == "admin") {
     if (!req.body.submit || !req.body.password) {
@@ -52,6 +52,11 @@ app.post("/verify", (req, res) => {
       return;
     }
     const password = req.body.password;
+    if (await getPassword() == hashIt(password)) {
+      console.log("True");
+    } else {
+      console.log("False");
+    }
     res.send(password);
   } else {
     res.redirect("localhost");
@@ -59,7 +64,6 @@ app.post("/verify", (req, res) => {
 });
 
 app.get("/verify", async (req, res) => {
-  //console.log(await getPassword());
   res.redirect("/");
 });
 

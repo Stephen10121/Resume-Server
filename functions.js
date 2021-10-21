@@ -1,4 +1,5 @@
-const fs = require('fs')
+const fs = require('fs');
+const crypto = require('crypto');
 
 async function getPassword() {
     try {
@@ -10,6 +11,10 @@ async function getPassword() {
     }
 }
 
+function hashIt(code) {
+    return crypto.createHash('sha256').update(code).digest('hex');
+}
+
 function getSubdomain(host) {
     var subdomain = host ? host.substring(0, host.lastIndexOf('.')) : null;
     return subdomain;
@@ -17,5 +22,6 @@ function getSubdomain(host) {
 
 module.exports = {
     getSubdomain,
-    getPassword
+    getPassword,
+    hashIt
 }
