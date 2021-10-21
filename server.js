@@ -52,12 +52,11 @@ app.post("/verify", async (req, res) => {
       return;
     }
     const password = req.body.password;
-    if (await getPassword() == hashIt(password)) {
-      console.log("True");
-    } else {
-      console.log("False");
+    if (await getPassword() !== hashIt(password)) {
+      res.redirect("/");
+      return;
     }
-    res.send(password);
+    res.send("Your in");
   } else {
     res.redirect("localhost");
   }
