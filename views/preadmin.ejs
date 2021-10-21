@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify | Gruzservices</title>
+</head>
+<body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #8BC6EC;
+            background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        form {
+            width: 50%;
+            height: 50%;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            box-shadow: black 8px 4px 50px 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        form input:first-child {
+            margin-bottom: 10px;
+        }
+
+        form input {
+            width: 90%;
+            height: 40px;
+        }
+
+        form input[type="submit"] {
+            cursor: pointer;
+            background-color: #8BC6EC;
+            background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+            opacity: 1;
+            border: none;
+            transition: opacity .25s ease-in-out;
+            -webkit-transition: opacity .25s ease-in-out;
+            -moz-transition: opacity .25s ease-in-out;
+            -o-transition: opacity .25s ease-in-out;
+        }
+
+        form input[type="submit"]:hover {
+            opacity: .9;
+        }
+    </style>
+    <form method="post" action="/verify">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</body>
+</html>

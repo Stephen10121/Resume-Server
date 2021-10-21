@@ -1,0 +1,257 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --main-bg-color: #404552;
+  --gray-1: #383c4a;
+  --gray-2: #4b5162;
+  --blue: #5293e2;
+  --gray-3: #7c818c;
+}
+
+body {
+  background-color: var(--gray-2);
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 70px auto 100px;
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  width: 100%;
+  height: 70px;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  background-color: var(--gray-1);
+  z-index: 100;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo a {
+  margin-left: 10px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.header-logo a h1 {
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.header-tabs {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  float: right;
+}
+
+.header-small {
+  width: auto;
+}
+
+.header-small button {
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: none;
+  transition: transform 300ms;
+}
+
+.header-small button svg {
+  width: auto;
+  height: auto;
+}
+
+.small-tab-slide {
+  z-index: 50;
+  position: absolute;
+  width: 100%;
+  display: none;
+  transition: all 300ms;
+  background-color: var(--main-bg-color);
+}
+
+.small-tab-slide ul {
+  padding: 5px;
+}
+
+.small-tab-slide ul li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.small-tab-slide ul li a {
+  font-size: 16px;
+  font-stretch: 50px;
+  text-transform: uppercase;
+  border: 1px solid var(--gray-3);
+  padding: 3px;
+}
+
+.blue {
+  color: var(--blue);
+}
+
+.black {
+  color: black;
+}
+
+.small-tab-slide ul li a:hover {
+  padding-left: 50px;
+  transition: all 300ms;
+}
+
+.header-tabs-big {
+  display: none;
+}
+
+.header-tabs-big ul {
+  float: right;
+}
+
+.header-tabs-big ul li {
+  display: inline;
+  margin-left: 5px;
+}
+
+.main {
+  background-image: url("/img/background.png");
+  background-size: cover;
+  background-attachment: fixed;
+  backdrop-filter: blur(20px);
+  padding-bottom: 50px;
+}
+
+.write-section:first-child {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 80%;
+  height: 300px;
+  background-color: var(--blue);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.write-section {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 80%;
+  min-height: 300px;
+  background-color: var(--blue);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.center-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.why-section h2 {
+  font-size: 20px;
+  font-style: oblique;
+}
+
+.why-section p {
+  margin-top: 10px;
+}
+
+.how-section img {
+  width: 95%;
+}
+
+.contact-section input {
+  outline: none;
+  height: 30px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  color: var(--main-bg-color);
+}
+
+.contact-section textarea {
+  outline: none;
+  resize: none;
+  margin-top: 10px;
+  background: #f3f3f3;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  color: var(--main-bg-color);
+}
+
+.contact-section button {
+  height: 30px;
+  cursor: pointer;
+  margin-top: 10px;
+  background: var(--main-bg-color);
+  border: none;
+  border-bottom: 1px solid var(--gray-3);
+  width: 100%;
+}
+
+.contact-section button:hover {
+  background: var(--gray-2);
+}
+
+.contact-section::placeholder {
+  color: var(--main-bg-color);
+}
+
+.how-section h2 {
+  font-size: 20px;
+  font-style: oblique;
+}
+
+.section1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section1 h1 {
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+.section1 h2 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-style: oblique;
+}
+
+/* Footer Styling */
+
+.footer {
+  background-color: var(--blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer ul {
+  list-style-type: none;
+}

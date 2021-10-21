@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <label for="height">Height</label>
+    <input type="range" name="height" max="" id="height"><br>
+    <label for="width">Length</label>
+    <input type="range" max=200 name="width" id="width">
+    <label for="amp">Amplitude</label>
+    <input type="range" max=600 name="amp" id="amp">
+    <script>
+        const socket = io();
+        var height = document.getElementById("height");
+        var width = document.getElementById('width');
+        var amp = document.getElementById('amp');
+        socket.on("adminCanvasHeight", (data) => {
+            height.max = data;
+        });
+        
+        height.oninput = function() {
+            socket.emit('height', this.value);
+            console.log(this.value);
+        }
+        width.oninput = function() {
+            var newVal = this.value/10000-0.01;
+            socket.emit('width', newVal);
+        }
+        amp.oninput = function() {
+            var newVal = this.value-300;
+            socket.emit('amp', newVal);
+        }
+    </script>
+</body>
+</html>
