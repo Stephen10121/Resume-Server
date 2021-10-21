@@ -56,14 +56,23 @@ app.post("/verify", async (req, res) => {
       res.redirect("/");
       return;
     }
-    res.send("Your in");
+    res.redirect("/panel");
   } else {
-    res.redirect("localhost");
+    res.redirect("/");
   }
 });
 
 app.get("/verify", async (req, res) => {
   res.redirect("/");
+});
+
+app.get("/panel", (req, res) => {
+  let host = req.get('host');
+  if (getSubdomain(host) == "admin") {
+    res.render("admin");
+  } else {
+    res.redirect("/");
+  }
 });
 
 app.get('/projects', (req, res) => {
