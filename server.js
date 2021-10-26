@@ -60,7 +60,7 @@ app.post("/verify", async (req, res) => {
       res.redirect("/");
       return;
     }
-    randKey = hashIt(password);
+    randKey = hashIt(hashIt(password));
     res.cookie("G_VER", randKey);
     res.redirect("/panel");
   } else {
