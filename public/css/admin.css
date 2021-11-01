@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors */
+  --purple: #5352c2;
+  --darkpurple: #59598f;
+  --lightpurple: #8d86f5;
+  --lightblue: #bed5fa;
+  --mint: #41c79d;
+  /* Sizing */
+  --header-height: 100px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+}
+
+.header {
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--purple);
+}
+
+.main-canvas {
+  width: 100%;
+  height: 100%;
+  background-color: #dfdfdf;
+}
