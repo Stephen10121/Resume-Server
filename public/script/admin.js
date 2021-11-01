@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 let header = document.getElementById("header").offsetHeight;
 console.log(header);
 canvas.height = window.innerHeight - header;
-
+//canvas.style.webkitFilter = "blur(5px)";
 var ctx = canvas.getContext("2d");
 
 /*
@@ -42,7 +42,8 @@ ctx.stroke();
 const circleAmount = 1000;
 const changeRadius = 75;
 const maxRadius = 40;
-const colorPallete = ["#ff9900", "#818181", "#454545", "#313131", "#181818"];
+const colorPallete = ["#5352c2", "#59598f", "#8d86f5", "#bed5fa", "#41c79d"];
+//const colorPallete = ["#ff9900", "#818181", "#454545", "#313131", "#181818"];
 const increaseSpeed = 4;
 var colorPalleteLength = colorPallete.length;
 var pos = 0;
@@ -53,7 +54,7 @@ var mouse = {
 
 window.addEventListener("mousemove", (event) => {
     mouse.x = event.x;
-    mouse.y = event.y;
+    mouse.y = event.y-100;
 });
 
 window.addEventListener("resize", () => {
@@ -85,7 +86,7 @@ function Circle(x, y, dx, dy, radius, color) {
             this.dx = -this.dx;
         }
     
-        if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
+        if (this.y + this.radius > innerHeight-100 || this.y - this.radius < 0) {
             this.dy = -this.dy;
         }
     
@@ -111,7 +112,7 @@ function init() {
     for (var i = 0; i < circleAmount; i++) {
         var radius = Math.random() * 30 + 1;
         var x = Math.random() * (innerWidth - radius * 2) + radius;
-        var y = Math.random() * (innerHeight - radius * 2) + radius;
+        var y = Math.random() * ((innerHeight-100) - radius * 2) + radius;
         var dx = (Math.random() - 0.5);
         var dy = (Math.random() - 0.5);
         var color;
