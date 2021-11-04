@@ -140,7 +140,6 @@ io.on('connection', socket => {
     if (data == password) {
       whiteList[socket.id] = 200;
       socket.emit("adminConnect", {id: socket.id, error: 200});
-      console.log(whiteList);
     } else {
       socket.emit("adminConnect", {error: 403});
     }
@@ -148,7 +147,14 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log(`${socket.id} disconnected`);
     delete whiteList[socket.id];
-    console.log(whiteList);
+  });
+
+  socket.on("test", (data) => {
+    if (whiteList[socket.id]) {
+      socket.emit("adminTest", "Hi there");
+    } else {
+      socket.emit("adminTest", {error: 403});
+    }
   });
 });
 
