@@ -2,6 +2,8 @@
 
 This is for my resume.
 
+For some reason I am also using this to control my arduino projects.
+
 ```
 npm init -y
 npm install
