@@ -54,7 +54,7 @@ var mouse = {
 
 window.addEventListener("mousemove", (event) => {
     mouse.x = event.x;
-    mouse.y = event.y-100;
+    mouse.y = event.y;
 });
 
 window.addEventListener("resize", () => {
@@ -92,13 +92,14 @@ function Circle(x, y, dx, dy, radius, color) {
     
         this.x += this.dx;
         this.y += this.dy;
-
-        if (mouse.x - this.x < changeRadius && mouse.x - this.x > -changeRadius && mouse.y - this.y < changeRadius && mouse.y - this.y > -changeRadius) {
-            if (this.radius < maxRadius) {
-                this.radius += increaseSpeed;
+        if (mouse.y>100){
+            if (mouse.x - this.x < changeRadius && mouse.x - this.x > -changeRadius && mouse.y - this.y < changeRadius && mouse.y - this.y > -changeRadius) {
+                if (this.radius < maxRadius) {
+                    this.radius += increaseSpeed;
+                }
+            } else if (this.radius > this.originalRadius+1){
+                this.radius -= increaseSpeed;
             }
-        } else if (this.radius > this.originalRadius+1){
-            this.radius -= increaseSpeed;
         }
 
         this.draw();

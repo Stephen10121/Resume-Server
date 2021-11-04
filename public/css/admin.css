@@ -27,6 +27,8 @@ body {
   width: 100%;
   height: var(--header-height);
   background-color: var(--purple);
+  display: flex;
+  align-items: center;
 }
 
 .main-canvas {
