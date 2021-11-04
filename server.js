@@ -141,11 +141,12 @@ io.on('connection', socket => {
       whiteList[socket.id] = 200;
       socket.emit("adminConnect", {id: socket.id, error: 200});
     } else {
-      socket.emit("adminConnect", {error: 403});
+      socket.disconnect();
+      console.log("disconnected someone");
+      //socket.emit("adminConnect", {error: 403});
     }
   });
   socket.on('disconnect', () => {
-    console.log(`${socket.id} disconnected`);
     delete whiteList[socket.id];
   });
 
