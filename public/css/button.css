@@ -7,8 +7,7 @@
   cursor: pointer;
   height: 30px;
   padding: 5px;
-  width: 100px;
-  max-width: 160px;
+  width: 100%;
   text-transform: uppercase;
   background: none;
   transition: all 0.25s linear;
