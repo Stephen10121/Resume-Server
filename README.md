@@ -11,6 +11,8 @@ npm install -g nodemon
 
 dont forget to make a password.txt file with a sha256 hashed password.
 
+YOU HAVE TO CREATE A PASSWORD FILE FOR THIS TO WORK
+
 Hash you password with this website:
 ```
 https://emn178.github.io/online-tools/sha256.html
