@@ -47,6 +47,11 @@ app.get('/', async (req, res) => {
   }
 });
 
+// REMOVE THIS AFTER DEBUG OR IN PRODUCTION
+app.get("/admin", (req, res) => {
+  res.render("admin");
+});
+
 app.post("/verify", async (req, res) => {
   let host = req.get('host');
   if (getSubdomain(host) == "admin") {
@@ -126,31 +131,25 @@ app.post("/contact", (req, res) => {
   res.render("contact", {message: "Message Sent!"});
 });
 
+let whiteList = new Object();
+
 io.on('connection', socket => {
-  socket.on("test", (data) => {
-    console.log(data);
-    socket.emit("adminTest", data);
-    socket.broadcast.emit("adminTest", data);
+  socket.on("auth", async (data) => {
+    let password = await getPassword()
+    password = hashIt(password);
+    if (data == password) {
+      whiteList[socket.id] = 200;
+      socket.emit("adminConnect", {id: socket.id, error: 200});
+      console.log(whiteList);
+    } else {
+      socket.emit("adminConnect", {error: 403});
+    }
   });
-
-  socket.on("height", (data) => {
-    socket.emit("adminHeight", data);
-    socket.broadcast.emit("adminHeight", data);
-  });
-
-  socket.on("width", (data) => {
-    socket.emit("adminWidth", data);
-    socket.broadcast.emit("adminWidth", data);
-  });
-
-  socket.on("amp", (data) => {
-    socket.emit("adminAmp", data);
-    socket.broadcast.emit("adminAmp", data);
-  });
-
-  socket.on("canvasHeight", (data) => {
-    socket.emit("adminCanvasHeight", data);
-    socket.broadcast.emit("adminCanvasHeight", data);
+  socket.on('disconnect', () => {
+    console.log(`${socket.id} disconnected`);
+    delete whiteList[socket.id];
+    console.log(whiteList);
   });
 });
+
 server.listen(PORT, () => console.log(`Server running on port ${PORT}.`));
