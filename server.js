@@ -8,12 +8,11 @@ if (PORT == 80) {
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { getSubdomain, getPassword, hashIt } = require('./functions.js');
+const { getSubdomain, getPassword, hashIt, cpuAverage } = require('./functions.js');
 const socketio = require('socket.io');
 const { runInNewContext } = require("vm");
 const cookieParser = require('cookie-parser')
 let randKey;
-
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -132,8 +131,19 @@ app.post("/contact", (req, res) => {
 });
 
 let whiteList = new Object();
-
+let startMeasure = cpuAverage();
+let prevPercentage = 0;
 io.on('connection', socket => {
+  setInterval(()=>{
+    var endMeasure = cpuAverage(); 
+    var idleDifference = endMeasure.idle - startMeasure.idle;
+    var totalDifference = endMeasure.total - startMeasure.total;
+    var percentageCPU = 100 - ~~(100 * idleDifference / totalDifference);
+    if (percentageCPU != prevPercentage) {
+      io.emit('adminCpu', percentageCPU);
+      prevPercentage = percentageCPU;
+    }
+  }, 1000);
   socket.on("auth", async (data) => {
     let password = await getPassword()
     password = hashIt(password);

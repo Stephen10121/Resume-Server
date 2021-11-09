@@ -1,0 +1,5 @@
+.progress-circle {
+  stroke-dasharray: 189;
+  stroke-dashoffset: 189;
+  stroke: var(--lightpurple);
+}
