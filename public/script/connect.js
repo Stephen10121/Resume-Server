@@ -38,6 +38,27 @@ function setPerc(percentage) {
         }
     }, 10);
 }
+
+function connectId() {
+    const idInput = document.getElementById("machineId");
+    const idSubmit = document.getElementById("connectId");
+    const idNotSubmit = document.getElementById("disconnectId");
+    idInput.style.display = "none";
+    idSubmit.style.display = "none";
+    idNotSubmit.innerHTML = `Connected to ${idInput.value}. Disconnect`;
+    idNotSubmit.style.display = "block";
+}
+
+function disconnectId() {
+    const idInput = document.getElementById("machineId");
+    const idSubmit = document.getElementById("connectId");
+    const idNotSubmit = document.getElementById("disconnectId");
+    idInput.style.display = "inline-block";
+    idSubmit.style.display = "inline-block";
+    idNotSubmit.innerHTML = `Connected to ${idInput.value}. Disconnect`;
+    idNotSubmit.style.display = "none";
+}
+
 socket.on("adminCpu", (data) => {
     setPerc(data);
     console.log(data);

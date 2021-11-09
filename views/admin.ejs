@@ -22,11 +22,16 @@
             <button class="btn mint-border top-border" onclick="customCommand()">Send Command</button>
             <button class="btn mint-border bottom-border">Bottom</button>
         </div>
-        <div class="group-1" title="CPU load">
+        <div class="group-1" title="CPU load***">
             <svg class="progress" width="100" height="100">
                 <circle class="progress-circle" id="progress-circle" cx="50" cy="50" r="30" fill="transparent" stroke="#dfdfdf" stroke-width="5"/>
                 <text class="loading" fill="#dfdfdf" x="50" y="50" text-anchor="middle" alignment-baseline="middle" id="perc">0%</text>
             </svg>
+        </div>
+        <div class="group-1 connect-machine" id="connectSection">
+            <input type="text" id="machineId" placeholder="Machine Id">
+            <button id="connectId" onclick="connectId()">Connect</button>
+            <button id="disconnectId" style="display: none;" onclick="disconnectId()">Disconnect</button>
         </div>
     </div>
     <div class="main-canvas" id="canvas-parent">

@@ -150,6 +150,7 @@ io.on('connection', socket => {
     if (data == password) {
       whiteList[socket.id] = 200;
       socket.emit("adminConnect", {id: socket.id, error: 200});
+      socket.emit('adminCpu', prevPercentage);
     } else {
       socket.disconnect();
       console.log("disconnected someone");

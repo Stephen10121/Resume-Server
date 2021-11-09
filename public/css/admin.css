@@ -46,3 +46,29 @@ body {
   margin-left: 10px;
   width: auto;
 }
+
+.connect-machine input {
+  background: #dfdfdf;
+  border: 1px solid var(--mint);
+  height: 30px;
+  outline: none;
+  color: black;
+}
+
+.connect-machine button {
+  border: none;
+  height: 30px;
+  outline: none;
+  color: black;
+  background: var(--mint);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.connect-machine button:hover {
+  opacity: 0.9;
+}
+
+.connect-machine h2 {
+  color: var(--lightblue);
+}
