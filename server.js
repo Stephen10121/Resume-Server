@@ -1,3 +1,4 @@
+// Set port to 80 for development, 443 for production
 const PORT = 80;
 let https;
 if (PORT == 80) {
@@ -5,6 +6,7 @@ if (PORT == 80) {
 } else {
   https = require("https");
 }
+// Import modules
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -12,6 +14,7 @@ const { getSubdomain, getPassword, hashIt, cpuAverage } = require('./functions.j
 const socketio = require('socket.io');
 const { runInNewContext } = require("vm");
 const cookieParser = require('cookie-parser')
+const { startSocket } = require('./socketmain.js');
 let randKey;
 
 const app = express();
@@ -22,6 +25,7 @@ app.use(
     express.urlencoded({ extended: true }),
     cookieParser()
     );
+
 let server;
 if (PORT == 80) {
   server = https.createServer(app);
@@ -34,8 +38,6 @@ if (PORT == 80) {
       app
   );
 }
-
-const io = socketio(server);
 
 app.get('/', async (req, res) => {
   let host = req.get('host');
@@ -50,6 +52,7 @@ app.get('/', async (req, res) => {
 app.get("/admin", (req, res) => {
   res.render("admin");
 });
+// REMOVE THIS ^^
 
 app.post("/verify", async (req, res) => {
   let host = req.get('host');
@@ -130,44 +133,7 @@ app.post("/contact", (req, res) => {
   res.render("contact", {message: "Message Sent!"});
 });
 
-let whiteList = new Object();
-let startMeasure = cpuAverage();
-let prevPercentage = 0;
-io.on('connection', socket => {
-  setInterval(()=>{
-    var endMeasure = cpuAverage(); 
-    var idleDifference = endMeasure.idle - startMeasure.idle;
-    var totalDifference = endMeasure.total - startMeasure.total;
-    var percentageCPU = 100 - ~~(100 * idleDifference / totalDifference);
-    if (percentageCPU != prevPercentage) {
-      io.emit('adminCpu', percentageCPU);
-      prevPercentage = percentageCPU;
-    }
-  }, 1000);
-  socket.on("auth", async (data) => {
-    let password = await getPassword()
-    password = hashIt(password);
-    if (data == password) {
-      whiteList[socket.id] = 200;
-      socket.emit("adminConnect", {id: socket.id, error: 200});
-      socket.emit('adminCpu', prevPercentage);
-    } else {
-      socket.disconnect();
-      console.log("disconnected someone");
-      //socket.emit("adminConnect", {error: 403});
-    }
-  });
-  socket.on('disconnect', () => {
-    delete whiteList[socket.id];
-  });
-
-  socket.on("test", (data) => {
-    if (whiteList[socket.id]) {
-      socket.emit("adminTest", "Hi there");
-    } else {
-      socket.emit("adminTest", {error: 403});
-    }
-  });
-});
+const io = socketio(server);
+startSocket(io);
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}.`));
