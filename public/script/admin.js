@@ -2,7 +2,6 @@
 var canvas = document.getElementById("main-canvas");
 canvas.width = window.innerWidth;
 let header = document.getElementById("header").offsetHeight;
-console.log(header);
 canvas.height = window.innerHeight - header;
 //canvas.style.webkitFilter = "blur(5px)";
 var ctx = canvas.getContext("2d");

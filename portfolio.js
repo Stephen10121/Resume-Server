@@ -1,23 +1,13 @@
-const textPerc = document.getElementById("perc");
-const roundPerc = document.getElementById("progress-circle");
+const socket = io("ws://admin.192.168.0.24");
 
-function map_range(value) {
-    return 189 + (0 - 189) * (value - 0) / (100 - 0);
-}
+socket.on("adminCpu", (data) => {
+    console.log(data);
+});
 
-function setPerc(percentage) {
-    let perc = 1;
-    let jeff = setInterval(()=> {
-        if (perc==percentage) {
-            clearInterval(jeff);
-        }
-        textPerc.innerHTML = `${perc}%`;
-        roundPerc.style.strokeDashoffset = map_range(perc);
-        perc++;
-    }, 10);
-}
+socket.on("adminConnect", (data) => {
+    console.log(data);
+});
 
-setPerc(50);
-
-//189 0
-//0 100
+socket.on("adminTest", (data) => {
+    console.log(data);
+});

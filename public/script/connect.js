@@ -1,65 +1,31 @@
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
 const socket = io();
-socket.emit("auth", getCookie("G_VER"));
-
-socket.on("adminConnect", (data) => {
-    console.log(data);
-});
-
-function customCommand() {
-    console.log("Custom Command");
-}
-
 const textPerc = document.getElementById("perc");
 const roundPerc = document.getElementById("progress-circle");
 let prevperc = 1;
-function map_range(value) {
-    return 189 + (0 - 189) * (value - 0) / (100 - 0);
-}
+const machineIdEvent = document.getElementById("machineId");
 
-function setPerc(percentage) {
-    let perc = prevperc;
-    let jeff = setInterval(()=> {
-        if (perc==percentage) {
-            prevperc = perc;
-            clearInterval(jeff);
-        }
-        textPerc.innerHTML = `${perc}%`;
-        roundPerc.style.strokeDashoffset = map_range(perc);
-        if (percentage<perc) {
-            perc--;
-        } else {
-            perc++;
-        }
-    }, 10);
-}
+// Startup
+socket.emit("auth", getCookie("G_VER"));
+// End Startup
 
-function connectId() {
-    const idInput = document.getElementById("machineId");
-    const idSubmit = document.getElementById("connectId");
-    const idNotSubmit = document.getElementById("disconnectId");
-    idInput.style.display = "none";
-    idSubmit.style.display = "none";
-    idNotSubmit.innerHTML = `Connected to ${idInput.value}. Disconnect`;
-    idNotSubmit.style.display = "block";
-}
+// Start Connect id section
 
-function disconnectId() {
-    const idInput = document.getElementById("machineId");
-    const idSubmit = document.getElementById("connectId");
-    const idNotSubmit = document.getElementById("disconnectId");
-    idInput.style.display = "inline-block";
-    idSubmit.style.display = "inline-block";
-    idNotSubmit.innerHTML = `Connected to ${idInput.value}. Disconnect`;
-    idNotSubmit.style.display = "none";
-}
+machineIdEvent.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        connectId();
+    }
+});
+
+// End Connect id section
+// Start Socket events
 
 socket.on("adminCpu", (data) => {
     setPerc(data);
-    console.log(data);
 });
+
+socket.on("adminConnect", (data) => {
+    console.log(`Error: ${data.error}`);
+});
+
+// End Socket events
