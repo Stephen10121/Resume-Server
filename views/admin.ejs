@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/button.css">
     <link rel="stylesheet" href="/css/roundprog.css">
+    <link rel="stylesheet" href="/css/toggle.css">
     <script defer src="/script/admin.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -19,6 +20,11 @@
 </head>
 <body>
     <div class="header" id="header">
+        <div class="group-1 connect-machine" id="connectSection">
+            <input type="text" id="machineId" placeholder="Machine Id">
+            <button id="connectId" onclick="connectId()">Connect</button>
+            <button id="disconnectId" style="display: none;" onclick="disconnectId()">Disconnect</button>
+        </div>
         <div class="group-1">
             <button class="btn mint-border top-border" onclick="customCommand()">Send Command</button>
             <button class="btn mint-border bottom-border">Bottom</button>
@@ -29,10 +35,17 @@
                 <text class="loading" fill="#dfdfdf" x="50" y="50" text-anchor="middle" alignment-baseline="middle" id="perc">0%</text>
             </svg>
         </div>
-        <div class="group-1 connect-machine" id="connectSection">
-            <input type="text" id="machineId" placeholder="Machine Id">
-            <button id="connectId" onclick="connectId()">Connect</button>
-            <button id="disconnectId" style="display: none;" onclick="disconnectId()">Disconnect</button>
+        <div class="group-1">
+            <div class="toggle-switch">
+                <input type="checkbox" id="switch" onclick="toggit()" />
+                <label for="switch">Toggle</label>
+            </div>
+        </div>
+        <div class="group-1">
+            <div class="toggle-switch">
+                <input type="checkbox" id="switch" onclick="toggit2()" />
+                <label for="switch">Toggle</label>
+            </div>
         </div>
     </div>
     <div class="main-canvas" id="canvas-parent">

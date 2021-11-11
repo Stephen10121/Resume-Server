@@ -60,3 +60,23 @@ function getCookie(name) {
 function customCommand() {
     console.log("Custom Command");
 }
+let tog1 = false;
+function toggit() {
+    if (tog1) {
+        console.log("Switch 1 Off");
+        tog1 = false;
+    } else {
+        console.log("Switch 1 On");
+        tog1 = true;
+    }
+}
+let tog2 = false;
+function toggit2() {
+    if (tog2) {
+        console.log("Switch 2 Off");
+        tog2 = false;
+    } else {
+        console.log("Switch 2 On");
+        tog2 = true;
+    }
+}

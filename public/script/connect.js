@@ -25,7 +25,7 @@ socket.on("adminCpu", (data) => {
 });
 
 socket.on("adminConnect", (data) => {
-    console.log(`Error: ${data.error}`);
+    console.log(`Error: .-+${data.error}`);
 });
 
 // End Socket events
